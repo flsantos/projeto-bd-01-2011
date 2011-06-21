@@ -26,7 +26,7 @@ $config['base_url']	= 'http://localhost/projeto_bd_01_2011';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = "";
 
 /*
 |--------------------------------------------------------------------------
