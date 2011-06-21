@@ -2,18 +2,18 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-DROP SCHEMA IF EXISTS `mydb` ;
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+DROP SCHEMA IF EXISTS `pibic` ;
+CREATE SCHEMA IF NOT EXISTS `pibic` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 SHOW WARNINGS;
-USE `mydb` ;
+USE `pibic` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`area`
+-- Table `pibic`.`area`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`area` ;
+DROP TABLE IF EXISTS `pibic`.`area` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`area` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`area` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   PRIMARY KEY (`id`) )
@@ -22,35 +22,35 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`palavra_chave`
+-- Table `pibic`.`palavra_chave`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`palavra_chave` ;
+DROP TABLE IF EXISTS `pibic`.`palavra_chave` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`palavra_chave` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`palavra_chave` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   `area_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_palavra_chave_area`
     FOREIGN KEY (`area_id` )
-    REFERENCES `mydb`.`area` (`id` )
+    REFERENCES `pibic`.`area` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_palavra_chave_area` ON `mydb`.`palavra_chave` (`area_id` ASC) ;
+CREATE INDEX `fk_palavra_chave_area` ON `pibic`.`palavra_chave` (`area_id` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`campus`
+-- Table `pibic`.`campus`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`campus` ;
+DROP TABLE IF EXISTS `pibic`.`campus` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`campus` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`campus` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   PRIMARY KEY (`id`) )
@@ -59,12 +59,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`depto`
+-- Table `pibic`.`depto`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`depto` ;
+DROP TABLE IF EXISTS `pibic`.`depto` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`depto` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`depto` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   `area_id` INT NOT NULL ,
@@ -73,39 +73,39 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`depto` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_depto_area1`
     FOREIGN KEY (`area_id` )
-    REFERENCES `mydb`.`area` (`id` )
+    REFERENCES `pibic`.`area` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_depto_depto1`
     FOREIGN KEY (`depto_id` )
-    REFERENCES `mydb`.`depto` (`id` )
+    REFERENCES `pibic`.`depto` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_depto_campus1`
     FOREIGN KEY (`campus_id` )
-    REFERENCES `mydb`.`campus` (`id` )
+    REFERENCES `pibic`.`campus` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_depto_area1` ON `mydb`.`depto` (`area_id` ASC) ;
+CREATE INDEX `fk_depto_area1` ON `pibic`.`depto` (`area_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_depto_depto1` ON `mydb`.`depto` (`depto_id` ASC) ;
+CREATE INDEX `fk_depto_depto1` ON `pibic`.`depto` (`depto_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_depto_campus1` ON `mydb`.`depto` (`campus_id` ASC) ;
+CREATE INDEX `fk_depto_campus1` ON `pibic`.`depto` (`campus_id` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`faculdade`
+-- Table `pibic`.`faculdade`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`faculdade` ;
+DROP TABLE IF EXISTS `pibic`.`faculdade` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`faculdade` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`faculdade` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   `area_id` INT NOT NULL ,
@@ -113,31 +113,31 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`faculdade` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_faculdade_area1`
     FOREIGN KEY (`area_id` )
-    REFERENCES `mydb`.`area` (`id` )
+    REFERENCES `pibic`.`area` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_faculdade_campus1`
     FOREIGN KEY (`campus_id` )
-    REFERENCES `mydb`.`campus` (`id` )
+    REFERENCES `pibic`.`campus` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_faculdade_area1` ON `mydb`.`faculdade` (`area_id` ASC) ;
+CREATE INDEX `fk_faculdade_area1` ON `pibic`.`faculdade` (`area_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_faculdade_campus1` ON `mydb`.`faculdade` (`campus_id` ASC) ;
+CREATE INDEX `fk_faculdade_campus1` ON `pibic`.`faculdade` (`campus_id` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`centro`
+-- Table `pibic`.`centro`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`centro` ;
+DROP TABLE IF EXISTS `pibic`.`centro` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`centro` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`centro` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   `area_id` INT NOT NULL ,
@@ -145,31 +145,31 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`centro` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_centro_area1`
     FOREIGN KEY (`area_id` )
-    REFERENCES `mydb`.`area` (`id` )
+    REFERENCES `pibic`.`area` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_centro_campus1`
     FOREIGN KEY (`campus_id` )
-    REFERENCES `mydb`.`campus` (`id` )
+    REFERENCES `pibic`.`campus` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_centro_area1` ON `mydb`.`centro` (`area_id` ASC) ;
+CREATE INDEX `fk_centro_area1` ON `pibic`.`centro` (`area_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_centro_campus1` ON `mydb`.`centro` (`campus_id` ASC) ;
+CREATE INDEX `fk_centro_campus1` ON `pibic`.`centro` (`campus_id` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`instituto`
+-- Table `pibic`.`instituto`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`instituto` ;
+DROP TABLE IF EXISTS `pibic`.`instituto` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`instituto` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`instituto` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   `area_id` INT NOT NULL ,
@@ -177,54 +177,54 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`instituto` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_instituto_area1`
     FOREIGN KEY (`area_id` )
-    REFERENCES `mydb`.`area` (`id` )
+    REFERENCES `pibic`.`area` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_instituto_campus1`
     FOREIGN KEY (`campus_id` )
-    REFERENCES `mydb`.`campus` (`id` )
+    REFERENCES `pibic`.`campus` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_instituto_area1` ON `mydb`.`instituto` (`area_id` ASC) ;
+CREATE INDEX `fk_instituto_area1` ON `pibic`.`instituto` (`area_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_instituto_campus1` ON `mydb`.`instituto` (`campus_id` ASC) ;
+CREATE INDEX `fk_instituto_campus1` ON `pibic`.`instituto` (`campus_id` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`curso`
+-- Table `pibic`.`curso`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`curso` ;
+DROP TABLE IF EXISTS `pibic`.`curso` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`curso` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`curso` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   `campus_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_curso_campus1`
     FOREIGN KEY (`campus_id` )
-    REFERENCES `mydb`.`campus` (`id` )
+    REFERENCES `pibic`.`campus` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_curso_campus1` ON `mydb`.`curso` (`campus_id` ASC) ;
+CREATE INDEX `fk_curso_campus1` ON `pibic`.`curso` (`campus_id` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`pessoa`
+-- Table `pibic`.`pessoa`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`pessoa` ;
+DROP TABLE IF EXISTS `pibic`.`pessoa` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`pessoa` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`pessoa` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(70) NOT NULL ,
   `estado_civil` INT NULL ,
@@ -235,12 +235,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`discente`
+-- Table `pibic`.`discente`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`discente` ;
+DROP TABLE IF EXISTS `pibic`.`discente` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`discente` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`discente` (
   `matricula` INT NOT NULL ,
   `site` VARCHAR(45) NULL ,
   `blog` VARCHAR(100) NULL ,
@@ -252,31 +252,31 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`discente` (
   PRIMARY KEY (`matricula`) ,
   CONSTRAINT `fk_discente_pessoa1`
     FOREIGN KEY (`pessoa_id` )
-    REFERENCES `mydb`.`pessoa` (`id` )
+    REFERENCES `pibic`.`pessoa` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_discente_curso1`
     FOREIGN KEY (`curso_id` )
-    REFERENCES `mydb`.`curso` (`id` )
+    REFERENCES `pibic`.`curso` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_discente_pessoa1` ON `mydb`.`discente` (`pessoa_id` ASC) ;
+CREATE INDEX `fk_discente_pessoa1` ON `pibic`.`discente` (`pessoa_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_discente_curso1` ON `mydb`.`discente` (`curso_id` ASC) ;
+CREATE INDEX `fk_discente_curso1` ON `pibic`.`discente` (`curso_id` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`bolsista`
+-- Table `pibic`.`bolsista`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`bolsista` ;
+DROP TABLE IF EXISTS `pibic`.`bolsista` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`bolsista` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`bolsista` (
   `edital` VARCHAR(45) NULL ,
   `outros` VARCHAR(100) NULL ,
   `cota_unb` INT NULL ,
@@ -289,7 +289,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`bolsista` (
   PRIMARY KEY (`discente_matricula`) ,
   CONSTRAINT `fk_bolsista_discente1`
     FOREIGN KEY (`discente_matricula` )
-    REFERENCES `mydb`.`discente` (`matricula` )
+    REFERENCES `pibic`.`discente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -297,35 +297,35 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`ira`
+-- Table `pibic`.`ira`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`ira` ;
+DROP TABLE IF EXISTS `pibic`.`ira` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`ira` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`ira` (
   `id` INT NOT NULL ,
   `valor` INT NULL ,
   `discente_matricula` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_ira_discente1`
     FOREIGN KEY (`discente_matricula` )
-    REFERENCES `mydb`.`discente` (`matricula` )
+    REFERENCES `pibic`.`discente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_ira_discente1` ON `mydb`.`ira` (`discente_matricula` ASC) ;
+CREATE INDEX `fk_ira_discente1` ON `pibic`.`ira` (`discente_matricula` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`tecnico_gestor`
+-- Table `pibic`.`tecnico_gestor`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`tecnico_gestor` ;
+DROP TABLE IF EXISTS `pibic`.`tecnico_gestor` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`tecnico_gestor` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`tecnico_gestor` (
   `id` INT NOT NULL ,
   `perfil` INT NOT NULL ,
   `site` VARCHAR(45) NULL ,
@@ -340,23 +340,23 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`tecnico_gestor` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_tecnico_gestor_pessoa1`
     FOREIGN KEY (`pessoa_id` )
-    REFERENCES `mydb`.`pessoa` (`id` )
+    REFERENCES `pibic`.`pessoa` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_tecnico_gestor_pessoa1` ON `mydb`.`tecnico_gestor` (`pessoa_id` ASC) ;
+CREATE INDEX `fk_tecnico_gestor_pessoa1` ON `pibic`.`tecnico_gestor` (`pessoa_id` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`docente`
+-- Table `pibic`.`docente`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`docente` ;
+DROP TABLE IF EXISTS `pibic`.`docente` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`docente` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`docente` (
   `matricula` INT NOT NULL ,
   `regime_trabalho` INT NULL ,
   `cv_lattes` VARCHAR(45) NULL ,
@@ -371,31 +371,31 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`docente` (
   PRIMARY KEY (`matricula`) ,
   CONSTRAINT `fk_docente_pessoa1`
     FOREIGN KEY (`pessoa_id` )
-    REFERENCES `mydb`.`pessoa` (`id` )
+    REFERENCES `pibic`.`pessoa` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_docente_campus1`
     FOREIGN KEY (`campus_id` )
-    REFERENCES `mydb`.`campus` (`id` )
+    REFERENCES `pibic`.`campus` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_docente_pessoa1` ON `mydb`.`docente` (`pessoa_id` ASC) ;
+CREATE INDEX `fk_docente_pessoa1` ON `pibic`.`docente` (`pessoa_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_docente_campus1` ON `mydb`.`docente` (`campus_id` ASC) ;
+CREATE INDEX `fk_docente_campus1` ON `pibic`.`docente` (`campus_id` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`email`
+-- Table `pibic`.`email`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`email` ;
+DROP TABLE IF EXISTS `pibic`.`email` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`email` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`email` (
   `id` INT NOT NULL ,
   `email` VARCHAR(45) NULL ,
   `discente_matricula` INT NULL ,
@@ -404,39 +404,39 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`email` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_email_discente1`
     FOREIGN KEY (`discente_matricula` )
-    REFERENCES `mydb`.`discente` (`matricula` )
+    REFERENCES `pibic`.`discente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_email_tecnico_gestor1`
     FOREIGN KEY (`tecnico_gestor_id` )
-    REFERENCES `mydb`.`tecnico_gestor` (`id` )
+    REFERENCES `pibic`.`tecnico_gestor` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_email_docente1`
     FOREIGN KEY (`docente_matricula` )
-    REFERENCES `mydb`.`docente` (`matricula` )
+    REFERENCES `pibic`.`docente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_email_discente1` ON `mydb`.`email` (`discente_matricula` ASC) ;
+CREATE INDEX `fk_email_discente1` ON `pibic`.`email` (`discente_matricula` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_email_tecnico_gestor1` ON `mydb`.`email` (`tecnico_gestor_id` ASC) ;
+CREATE INDEX `fk_email_tecnico_gestor1` ON `pibic`.`email` (`tecnico_gestor_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_email_docente1` ON `mydb`.`email` (`docente_matricula` ASC) ;
+CREATE INDEX `fk_email_docente1` ON `pibic`.`email` (`docente_matricula` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`telefone`
+-- Table `pibic`.`telefone`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`telefone` ;
+DROP TABLE IF EXISTS `pibic`.`telefone` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`telefone` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`telefone` (
   `id` INT NOT NULL ,
   `telefone` VARCHAR(45) NULL ,
   `tipo` INT NULL ,
@@ -446,39 +446,39 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`telefone` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_telefone_discente1`
     FOREIGN KEY (`discente_matricula` )
-    REFERENCES `mydb`.`discente` (`matricula` )
+    REFERENCES `pibic`.`discente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_telefone_tecnico_gestor1`
     FOREIGN KEY (`tecnico_gestor_id` )
-    REFERENCES `mydb`.`tecnico_gestor` (`id` )
+    REFERENCES `pibic`.`tecnico_gestor` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_telefone_docente1`
     FOREIGN KEY (`docente_matricula` )
-    REFERENCES `mydb`.`docente` (`matricula` )
+    REFERENCES `pibic`.`docente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_telefone_discente1` ON `mydb`.`telefone` (`discente_matricula` ASC) ;
+CREATE INDEX `fk_telefone_discente1` ON `pibic`.`telefone` (`discente_matricula` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_telefone_tecnico_gestor1` ON `mydb`.`telefone` (`tecnico_gestor_id` ASC) ;
+CREATE INDEX `fk_telefone_tecnico_gestor1` ON `pibic`.`telefone` (`tecnico_gestor_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_telefone_docente1` ON `mydb`.`telefone` (`docente_matricula` ASC) ;
+CREATE INDEX `fk_telefone_docente1` ON `pibic`.`telefone` (`docente_matricula` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`titulacao`
+-- Table `pibic`.`titulacao`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`titulacao` ;
+DROP TABLE IF EXISTS `pibic`.`titulacao` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`titulacao` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`titulacao` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   PRIMARY KEY (`id`) )
@@ -487,51 +487,51 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`historico_titulacao`
+-- Table `pibic`.`historico_titulacao`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`historico_titulacao` ;
+DROP TABLE IF EXISTS `pibic`.`historico_titulacao` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`historico_titulacao` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`historico_titulacao` (
   `data` DATE NULL ,
   `titulacao_id` INT NOT NULL ,
   `tecnico_gestor_id` INT NULL ,
   `docente_matricula` INT NULL ,
   CONSTRAINT `fk_historico_titulacao_titulacao1`
     FOREIGN KEY (`titulacao_id` )
-    REFERENCES `mydb`.`titulacao` (`id` )
+    REFERENCES `pibic`.`titulacao` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_historico_titulacao_tecnico_gestor1`
     FOREIGN KEY (`tecnico_gestor_id` )
-    REFERENCES `mydb`.`tecnico_gestor` (`id` )
+    REFERENCES `pibic`.`tecnico_gestor` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_historico_titulacao_docente1`
     FOREIGN KEY (`docente_matricula` )
-    REFERENCES `mydb`.`docente` (`matricula` )
+    REFERENCES `pibic`.`docente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_historico_titulacao_titulacao1` ON `mydb`.`historico_titulacao` (`titulacao_id` ASC) ;
+CREATE INDEX `fk_historico_titulacao_titulacao1` ON `pibic`.`historico_titulacao` (`titulacao_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_historico_titulacao_tecnico_gestor1` ON `mydb`.`historico_titulacao` (`tecnico_gestor_id` ASC) ;
+CREATE INDEX `fk_historico_titulacao_tecnico_gestor1` ON `pibic`.`historico_titulacao` (`tecnico_gestor_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_historico_titulacao_docente1` ON `mydb`.`historico_titulacao` (`docente_matricula` ASC) ;
+CREATE INDEX `fk_historico_titulacao_docente1` ON `pibic`.`historico_titulacao` (`docente_matricula` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`com_inst_gestor`
+-- Table `pibic`.`com_inst_gestor`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`com_inst_gestor` ;
+DROP TABLE IF EXISTS `pibic`.`com_inst_gestor` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`com_inst_gestor` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`com_inst_gestor` (
   `id` INT NOT NULL ,
   `data_entrada` DATE NULL ,
   `data_saida` DATE NULL ,
@@ -539,23 +539,23 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`com_inst_gestor` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_cig_docente1`
     FOREIGN KEY (`docente_matricula` )
-    REFERENCES `mydb`.`docente` (`matricula` )
+    REFERENCES `pibic`.`docente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_cig_docente1` ON `mydb`.`com_inst_gestor` (`docente_matricula` ASC) ;
+CREATE INDEX `fk_cig_docente1` ON `pibic`.`com_inst_gestor` (`docente_matricula` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`com_externo`
+-- Table `pibic`.`com_externo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`com_externo` ;
+DROP TABLE IF EXISTS `pibic`.`com_externo` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`com_externo` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`com_externo` (
   `id` INT NOT NULL ,
   `data_entrada` DATE NULL ,
   `data_saida` DATE NULL ,
@@ -563,69 +563,69 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`com_externo` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_com_externo_docente1`
     FOREIGN KEY (`docente_matricula` )
-    REFERENCES `mydb`.`docente` (`matricula` )
+    REFERENCES `pibic`.`docente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_com_externo_docente1` ON `mydb`.`com_externo` (`docente_matricula` ASC) ;
+CREATE INDEX `fk_com_externo_docente1` ON `pibic`.`com_externo` (`docente_matricula` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`situacao_proic`
+-- Table `pibic`.`situacao_proic`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`situacao_proic` ;
+DROP TABLE IF EXISTS `pibic`.`situacao_proic` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`situacao_proic` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`situacao_proic` (
   `id` INT NOT NULL ,
   `inadimplencia` VARCHAR(120) NULL ,
   `docente_matricula` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_situacao_proic_docente1`
     FOREIGN KEY (`docente_matricula` )
-    REFERENCES `mydb`.`docente` (`matricula` )
+    REFERENCES `pibic`.`docente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_situacao_proic_docente1` ON `mydb`.`situacao_proic` (`docente_matricula` ASC) ;
+CREATE INDEX `fk_situacao_proic_docente1` ON `pibic`.`situacao_proic` (`docente_matricula` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`bols_produtiv`
+-- Table `pibic`.`bols_produtiv`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`bols_produtiv` ;
+DROP TABLE IF EXISTS `pibic`.`bols_produtiv` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`bols_produtiv` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`bols_produtiv` (
   `id` INT NOT NULL ,
   `nivel` VARCHAR(45) NULL ,
   `docente_matricula` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_bols_produtiv_docente1`
     FOREIGN KEY (`docente_matricula` )
-    REFERENCES `mydb`.`docente` (`matricula` )
+    REFERENCES `pibic`.`docente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_bols_produtiv_docente1` ON `mydb`.`bols_produtiv` (`docente_matricula` ASC) ;
+CREATE INDEX `fk_bols_produtiv_docente1` ON `pibic`.`bols_produtiv` (`docente_matricula` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`qualis`
+-- Table `pibic`.`qualis`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`qualis` ;
+DROP TABLE IF EXISTS `pibic`.`qualis` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`qualis` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`qualis` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   `data` DATE NULL ,
@@ -633,23 +633,23 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`qualis` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_qualis_docente1`
     FOREIGN KEY (`docente_matricula` )
-    REFERENCES `mydb`.`docente` (`matricula` )
+    REFERENCES `pibic`.`docente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_qualis_docente1` ON `mydb`.`qualis` (`docente_matricula` ASC) ;
+CREATE INDEX `fk_qualis_docente1` ON `pibic`.`qualis` (`docente_matricula` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`livro`
+-- Table `pibic`.`livro`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`livro` ;
+DROP TABLE IF EXISTS `pibic`.`livro` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`livro` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`livro` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   `editorial` VARCHAR(45) NULL ,
@@ -658,23 +658,23 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`livro` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_livro_docente1`
     FOREIGN KEY (`docente_matricula` )
-    REFERENCES `mydb`.`docente` (`matricula` )
+    REFERENCES `pibic`.`docente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_livro_docente1` ON `mydb`.`livro` (`docente_matricula` ASC) ;
+CREATE INDEX `fk_livro_docente1` ON `pibic`.`livro` (`docente_matricula` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`outras_producoes`
+-- Table `pibic`.`outras_producoes`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`outras_producoes` ;
+DROP TABLE IF EXISTS `pibic`.`outras_producoes` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`outras_producoes` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`outras_producoes` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   `tipo` INT NULL ,
@@ -683,23 +683,23 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`outras_producoes` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_outras_producoes_docente1`
     FOREIGN KEY (`docente_matricula` )
-    REFERENCES `mydb`.`docente` (`matricula` )
+    REFERENCES `pibic`.`docente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_outras_producoes_docente1` ON `mydb`.`outras_producoes` (`docente_matricula` ASC) ;
+CREATE INDEX `fk_outras_producoes_docente1` ON `pibic`.`outras_producoes` (`docente_matricula` ASC) ;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`tipo_orientacao`
+-- Table `pibic`.`tipo_orientacao`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`tipo_orientacao` ;
+DROP TABLE IF EXISTS `pibic`.`tipo_orientacao` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`tipo_orientacao` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`tipo_orientacao` (
   `id` INT NOT NULL ,
   `nome` VARCHAR(45) NULL ,
   PRIMARY KEY (`id`) )
@@ -708,33 +708,33 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`tipo_or_x_doc`
+-- Table `pibic`.`tipo_or_x_doc`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`tipo_or_x_doc` ;
+DROP TABLE IF EXISTS `pibic`.`tipo_or_x_doc` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`tipo_or_x_doc` (
+CREATE  TABLE IF NOT EXISTS `pibic`.`tipo_or_x_doc` (
   `data_ini` DATE NULL ,
   `data_fim` DATE NULL ,
   `tipo_orientacao_id` INT NOT NULL ,
   `docente_matricula` INT NOT NULL ,
   CONSTRAINT `fk_tipo_or_x_doc_tipo_orientacao1`
     FOREIGN KEY (`tipo_orientacao_id` )
-    REFERENCES `mydb`.`tipo_orientacao` (`id` )
+    REFERENCES `pibic`.`tipo_orientacao` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tipo_or_x_doc_docente1`
     FOREIGN KEY (`docente_matricula` )
-    REFERENCES `mydb`.`docente` (`matricula` )
+    REFERENCES `pibic`.`docente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_tipo_or_x_doc_tipo_orientacao1` ON `mydb`.`tipo_or_x_doc` (`tipo_orientacao_id` ASC) ;
+CREATE INDEX `fk_tipo_or_x_doc_tipo_orientacao1` ON `pibic`.`tipo_or_x_doc` (`tipo_orientacao_id` ASC) ;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_tipo_or_x_doc_docente1` ON `mydb`.`tipo_or_x_doc` (`docente_matricula` ASC) ;
+CREATE INDEX `fk_tipo_or_x_doc_docente1` ON `pibic`.`tipo_or_x_doc` (`docente_matricula` ASC) ;
 
 SHOW WARNINGS;
 
