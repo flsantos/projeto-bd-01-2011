@@ -6,7 +6,7 @@ class PessoaModel extends CI_Model {
 		if ($this->input->post('id')) {
 			$this->db->where('id', $this->input->post('id'));
 			$this->db->update('pessoa', $dados);
-			return $dados('id');
+			return $dados['id'];
 		}
 		else {
 			return $this->db->insert('pessoa', $dados);
@@ -21,7 +21,10 @@ class PessoaModel extends CI_Model {
 			return false;
 	}
 	
-	function pesquisar() {
+	function pesquisar($params) {
+		if ($params['id']) {
+			$this->db->where('id', $params['id']);
+		}
 		return $this->db->get('pessoa')->result();
 	}
 	
