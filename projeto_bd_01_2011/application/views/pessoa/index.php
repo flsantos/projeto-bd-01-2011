@@ -1,4 +1,5 @@
-<?php $this->load->helper('html') ?>
+<?php $this->load->helper('html'); ?>
+<?php $this->load->helper('url'); ?>
 
 <?php doctype() ?>
 
@@ -32,6 +33,8 @@
 						<td><?=$pessoa->nome?></td>
 						<td><?=$pessoa->estado_civil?></td>
 						<td><?=$pessoa->sexo?></td>
+						<td><?=anchor('pessoa/alterar/'.$pessoa->id, 'Editar', 'Editar registro')?></td>
+						<td><?=anchor('pessoa/excluir/'.$pessoa->id, 'Excluir', 'Excluir registro')?></td>
 					</tr>	
 				<?php endforeach;?>
 			<?php endif; ?>
