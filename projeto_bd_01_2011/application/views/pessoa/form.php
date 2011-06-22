@@ -4,6 +4,57 @@
 <html>
 <head>
 	<?php meta() ?>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"> </script>
+	<script type="text/javascript">
+	var i = 2;
+	function addEmail() {
+		var email = $("#email1").clone();
+		email.find("#email1").attr("id", "email"+i);
+		email.find("a").attr("style", "");
+		email.find("label").html('Email '+i+':'); 
+		$("#emails").append("<div id='email"+i+"'>"+email.html()+"</div>");
+		i++;
+	}
+	function removeEmail(instance) {
+		if (instance.parent().attr("id") != "email1") {
+			instance.parent().remove();
+			i--;
+		}
+	}
+
+	var j = 2;
+	function addTelefone() {
+		var telefone = $("#telefone1").clone();
+		telefone.find("#telefone1").attr("id", "telefone"+j);
+		telefone.find("a").attr("style", "");
+		telefone.find("label").html('Telefone Fixo '+j+':'); 
+		$("#telefones").append("<div id='telefone"+j+"'>"+telefone.html()+"</div>");
+		j++;
+	}
+	function removeTelefone(instance) {
+		if (instance.parent().attr("id") != "telefone1") {
+			instance.parent().remove();
+			j--;
+		}
+	}
+
+	var k = 2;
+	function addTitulacao() {
+		var titulacao = $("#titulacao1").clone();
+		titulacao.find("#titulacao1").attr("id", "titulacao"+k);
+		titulacao.find("a").attr("style", "");
+		titulacao.find("label[for='titulacao']").html('Titulacao '+k+':'); 
+		$("#titulacoes").append("<div id='titulacao"+k+"'>"+titulacao.html()+"</div>");
+		k++;
+	}
+	function removeTitulacao(instance) {
+		if (instance.parent().attr("id") != "titulacao1") {
+			instance.parent().remove();
+			k--;
+		}
+	}
+	
+	</script>
 </head>
 
 <body>
@@ -46,25 +97,25 @@
 			<?=form_label('Twitter: ', 'twitter')?>
 			<?=form_input('twitter', $pessoas ? $pessoas[0]->twitter : '', '')?>
 		</div>
-		<div>
-			<?=form_label('Email 1: ', 'email1')?>
-			<?=form_input('email1', $pessoas ? $pessoas[0]->twitter : '', '')?>
+		<div id="emails">
+			<div id="email1">
+				<?=form_label('Email 1: ', 'email1')?>
+				<?=form_input('email1', $pessoas ? $pessoas[0]->twitter : '', '')?>
+				<a onclick="removeEmail($(this));" href="javascript:void(0);" style="display:none;"> Remover </a>
+			</div>
 		</div>
 		<div>
-			<?=form_label('Email 2: ', 'email2')?>
-			<?=form_input('email2', $pessoas ? $pessoas[0]->twitter : '', '')?>
+			<a onclick="addEmail();" href="javascript:void(0);"> Novo email </a>
+		</div>
+		<div id="telefones">
+			<div id="telefone1">
+				<?=form_label('Telefone Fixo 1: ', 'telefone1')?>
+				<?=form_input('telefone1', $pessoas ? $pessoas[0]->twitter : '', '')?>
+				<a onclick="removeTelefone($(this));" href="javascript:void(0);" style="display:none;"> Remover </a>
+			</div>
 		</div>
 		<div>
-			<?=form_label('Email 3: ', 'email3')?>
-			<?=form_input('email3', $pessoas ? $pessoas[0]->twitter : '', '')?>
-		</div>
-		<div>
-			<?=form_label('Telefone Fixo 1: ', 'tel_fixo1')?>
-			<?=form_input('tel_fixo1', $pessoas ? $pessoas[0]->twitter : '', '')?>
-		</div>
-		<div>
-			<?=form_label('Telefone Fixo 2: ', 'tel_fixo2')?>
-			<?=form_input('tel_fixo2', $pessoas ? $pessoas[0]->twitter : '', '')?>
+			<a onclick="addTelefone();" href="javascript:void(0);"> Novo telefone </a>
 		</div>
 		<div>
 			<?=form_label('Telefone Celular: ', 'tel_cel')?>
@@ -78,19 +129,34 @@
 			<?=form_label('CV Lates (Link): ', 'cv_lates')?>
 			<?=form_input('cv_lates', $pessoas ? $pessoas[0]->twitter : '', '')?>
 		</div>
+		<div id="titulacoes">
+			<div id="titulacao1">
+				<?=form_label('Titulação: ', 'titulacao')?>
+				<br/>
+				<?=form_radio('titulacao', 1, $pessoas ? ($pessoas[0]->estado_civil == 1 ? TRUE : '') : '')?> Graduação
+				<?=form_radio('titulacao', 2, $pessoas ? ($pessoas[0]->estado_civil == 2 ? TRUE : '') : '')?> Aperfeiçoamento
+				<?=form_radio('titulacao', 3, $pessoas ? ($pessoas[0]->estado_civil == 3 ? TRUE : '') : '')?> Especialização
+				<?=form_radio('titulacao', 4, $pessoas ? ($pessoas[0]->estado_civil == 4 ? TRUE : '') : '')?> Mestrado
+				<?=form_radio('titulacao', 5, $pessoas ? ($pessoas[0]->estado_civil == 5 ? TRUE : '') : '')?> Doutorado
+				<?=form_radio('pos-titulacao', 6, $pessoas ? ($pessoas[0]->estado_civil == 6 ? TRUE : '') : '')?> Pós-Doutorado  ---    
+				Data: <?=form_input('data_pos-doutorado', '', '')?>
+				<a onclick="removeTitulacao($(this));" href="javascript:void(0);" style="display:none;"> Remover </a>
+			</div>
+		</div>
 		<div>
-			<?=form_label('Titulação: ', 'titulacao')?>
-			<br/>
-			<?=form_checkbox('graduacao', 1, $pessoas ? ($pessoas[0]->estado_civil == 1 ? TRUE : '') : '')?> <?=form_label('Graduação - ', 'graduacao')?>  Data: <?=form_input('data_graduacao', '', '')?> <br/>
-			<?=form_checkbox('aperfeicoamento', 2, $pessoas ? ($pessoas[0]->estado_civil == 2 ? TRUE : '') : '')?> <?=form_label('Aperfeiçoamento: ', 'aperfeicoamento')?>  Data: <?=form_input('data_aperfeicoamento', '', '')?> <br/>
-			<?=form_checkbox('especializacao', 3, $pessoas ? ($pessoas[0]->estado_civil == 3 ? TRUE : '') : '')?> <?=form_label('Especialização: ', 'especializacao')?>   Data: <?=form_input('data_especializacao', '', '')?> <br/>
-			<?=form_checkbox('mestrado', 4, $pessoas ? ($pessoas[0]->estado_civil == 4 ? TRUE : '') : '')?> <?=form_label('Mestrado: ', 'mestrado')?>  Data: <?=form_input('data_mestrado', '', '')?> <br/>
-			<?=form_checkbox('doutorado', 5, $pessoas ? ($pessoas[0]->estado_civil == 5 ? TRUE : '') : '')?> <?=form_label('Doutorado: ', 'doutorado')?>  Data: <?=form_input('data_doutorado', '', '')?> <br/>
-			<?=form_checkbox('pos-doutorado', 6, $pessoas ? ($pessoas[0]->estado_civil == 6 ? TRUE : '') : '')?> <?=form_label('Pós-Doutorado: ', 'pos-doutorado')?>  Data: <?=form_input('data_pos-doutorado', '', '')?> <br/>
+			<a onclick="addTitulacao();" href="javascript:void(0);"> Nova titulação </a>
 		</div>
 		<div>
 			<?=form_label('Graduação: ', 'graduacao')?>
 			<?=form_input('graduacao', $pessoas ? $pessoas[0]->twitter : '', '')?>
+		</div>
+		<div>
+			<?=form_label('Data de Admissão: ', 'data_admissao')?>
+			<?=form_input('data_admissao', $pessoas ? $pessoas[0]->twitter : '', '')?>
+		</div>
+		<div>
+			<?=form_label('Data de Saída: ', 'data_saida')?>
+			<?=form_input('data_saida', $pessoas ? $pessoas[0]->twitter : '', '')?>
 		</div>
 		<br/>
 	
