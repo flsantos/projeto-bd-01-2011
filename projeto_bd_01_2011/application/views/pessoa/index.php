@@ -1,5 +1,3 @@
-<?php $this->load->helper('html'); ?>
-<?php $this->load->helper('url'); ?>
 
 <?php doctype() ?>
 
@@ -40,6 +38,8 @@
 			<?php endif; ?>
 			</tbody>
 		</table>
+		<br/>
+		<?=anchor('pessoa/alterar', 'Cadastrar nova pessoa', 'Novo registro')?>
 	</div>
 
 

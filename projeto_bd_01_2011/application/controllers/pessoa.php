@@ -8,20 +8,28 @@ class Pessoa extends CI_Controller {
 	}
 	
 	function index() {
-		
-		$dados['pessoas'] = $this->PessoaModel->pesquisar();
+		$params['id'] = '';
+		$dados['pessoas'] = $this->PessoaModel->pesquisar($params);
 		
 		$this->load->view('pessoa/index', $dados);
 	}
 	
 	function alterar() {
-		$this->load->view('pessoa/form');
+		if ($this->uri->segment(3)) {
+			$params['id'] = $this->uri->segment(3);
+			$dados['pessoas'] = $this->PessoaModel->pesquisar($params);
+			$this->load->view('pessoa/form', $dados);
+		}
+		else {
+			$dados['pessoas'] = null;
+			$this->load->view('pessoa/form', $dados);
+		}
 	}
 	
 	function alterando() {
 		if ($this->input->post('id')) {
 			$dados = array (
-				"id" => $this->uri->segment(3),
+				"id" => $this->input->post('id'),
 				"nome" => $this->input->post('nome'),
 				"estado_civil" => $this->input->post('estado_civil'),
 				"sexo" => $this->input->post('sexo')
@@ -47,10 +55,10 @@ class Pessoa extends CI_Controller {
 		$pessoa_id = $this->uri->segment(3);
 		
 		if ($this->PessoaModel->excluir($pessoa_id)) {
-			//Mensagem de exclusao efetuada
+			$this->session->set_userdata('mensagem', 'Pessoa excluída com sucesso');
 		}
 		else {
-			//Mensagem de que não pode efetuar exclusão
+			$this->session->set_userdata('erro', 'Erro ao excluir essa Pessoa');
 		}
 		
 		redirect('pessoa/index');
