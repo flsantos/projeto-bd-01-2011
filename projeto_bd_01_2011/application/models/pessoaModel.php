@@ -3,8 +3,8 @@
 class PessoaModel extends CI_Model {
 	
 	function inserir ($dados) {
-		if ($this->input->post('id')) {
-			$this->db->where('id', $this->input->post('id'));
+		if ($this->input->post('id_pessoa')) {
+			$this->db->where('id', $this->input->post('id_pessoa'));
 			$this->db->update('pessoa', $dados);
 			return $dados['id'];
 		}
