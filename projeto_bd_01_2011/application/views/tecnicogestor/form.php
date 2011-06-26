@@ -4,7 +4,7 @@
 <html>
 <head>
 	<?php meta() ?>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"> </script>
+	<script type="text/javascript" src="<?=base_url()?>public/js/jquery-1.5.1.min.js"> </script>
 	<script type="text/javascript">
 	var i = <?php if($emails) echo count($emails)+1; else echo "2"; ?>;
 	function addEmail() {
