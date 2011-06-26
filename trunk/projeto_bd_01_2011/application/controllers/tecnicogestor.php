@@ -17,6 +17,7 @@ class TecnicoGestor extends CI_Controller {
 	}
 	
 	function visualizar() {
+		$this->output->enable_profiler(true);
 		if ($this->uri->segment(3)) {
 			$params['id'] = $this->uri->segment(3);$params['join_telefone'] = '';$params['join_email'] = '';$params['join_pessoa'] = '';$params['join_titulacao'] = '';
 			$dados['tecnicogestor'] = $this->TecnicoGestorModel->pesquisar($params);
