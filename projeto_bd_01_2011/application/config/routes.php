@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "pessoa";
+$route['default_controller'] = "tecnicogestor";
 $route['404_override'] = '';
 
 
