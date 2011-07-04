@@ -1,9 +1,11 @@
 <?php $this->load->helper('form'); ?>
+<?=doctype('html5') ?>
 
-<?php doctype() ?>
 <html>
 <head>
-	<?php meta() ?>
+	<?=meta('Content-type', 'text/html; charset=utf-8', 'equiv');?>
+	<link rel="stylesheet" href="<?=base_url()?>public/css/corpo/default.css" type="text/css" />
+	
 	<script type="text/javascript" src="<?=base_url()?>public/js/jquery-1.5.1.min.js"> </script>
 	<script type="text/javascript">
 	var i = <?php if($emails) echo count($emails)+1; else echo "2"; ?>;
@@ -78,168 +80,200 @@
 </head>
 
 <body>
-	
+	<!-- start header -->
+<div id="logo">
 	<?php
 		if ($tecnicogestor == null) 
-			echo "<h1>Cadastrar novo Técnico/Gestor</h1>";
+			echo "<h1>Cadastrar </h1>";
 	 	else 
-	 		echo "<h1>Atualizar Técnico/Gestor</h1>";
+	 		echo "<h1>Atualizar TÃ©cnico/Gestor</h1>";
 	 ?>
-	
-	<?=form_open('tecnicogestor/alterando');?>
-		<?php if ($tecnicogestor != null) echo form_hidden('id', $tecnicogestor[0]->id)	?>
-		<?php if ($pessoas != null) echo form_hidden('id_pessoa', $pessoas[0]->id)	?>
-		<?php if ($emails != null) { $l = 1; foreach ($emails as $em) { echo form_hidden('id_email'.$l, $em->id); $l++;}}?>
-		<?php if ($telefones != null) { $l = 1; foreach ($telefones as $te) { echo form_hidden('id_telefone'.$l, $te->id); $l++;}}?>
-		<?php if ($titulacoes != null) { $l = 1; foreach ($titulacoes as $ti) { echo form_hidden('id_titulacao'.$l, $ti->id); $l++;}}?>
-	
-		<div>
-			<?=form_label('Nome: ', 'nome')?>
-			<?=form_input('nome', $pessoas ? $pessoas[0]->nome : 'Fulaninho da Silva', '')?>
-		</div>
-		<div>
-			<?=form_label('Estado Civil: ', 'estado_civil')?>
-			<?=form_radio('estado_civil', 1, $pessoas ? ($pessoas[0]->estado_civil == 1 ? TRUE : '') : '')?> <?=form_label('Solteiro(a)', 'ec_solteiro')?>
-			<?=form_radio('estado_civil', 2, $pessoas ? ($pessoas[0]->estado_civil == 2 ? TRUE : '') : 'TRUE')?> <?=form_label('Casado(a)', 'ec_casado')?>
-			<?=form_radio('estado_civil', 3, $pessoas ? ($pessoas[0]->estado_civil == 3 ? TRUE : '') : '')?> <?=form_label('Divorciado(a)', 'ec_divorciado')?>
-			<?=form_radio('estado_civil', 4, $pessoas ? ($pessoas[0]->estado_civil == 4 ? TRUE : '') : '')?> <?=form_label('Viúvo(a)', 'ec_viuvo')?>
-		</div>
-		<div>
-			<?=form_label('Sexo: ', 'sexo')?>
-			<?=form_radio('sexo', 1, $pessoas ? ($pessoas[0]->sexo == 1 ? TRUE : '') : 'TRUE')?> <?=form_label('Masculino', 'sexo')?>
-			<?=form_radio('sexo', 2, $pessoas ? ($pessoas[0]->sexo == 2 ? TRUE : '') : '')?> <?=form_label('Feminino', 'sexo')?>
-		</div>
-		<div>
-			<?=form_label('Cargo: ', 'tipo')?>
-			<?=form_radio('tipo', 1, $tecnicogestor ? ($tecnicogestor[0]->perfil == 1 ? TRUE : '') : '')?> <?=form_label('Técnico', 'tipo')?>
-			<?=form_radio('tipo', 2, $tecnicogestor ? ($tecnicogestor[0]->perfil == 2 ? TRUE : '') : 'TRUE')?> <?=form_label('Gestor', 'tipo')?>
-		</div>
-		<div>
-			<?=form_label('Site: ', 'site')?>
-			<?=form_input('site', $tecnicogestor ? $tecnicogestor[0]->site : 'http://www.fulaninho.com.br', '')?>
-		</div>
-		<div>
-			<?=form_label('Blog: ', 'blog')?>
-			<?=form_input('blog', $tecnicogestor ? $tecnicogestor[0]->blog : 'http://www.fulaninho.blogspot.com', '')?>
-		</div>
-		<div>
-			<?=form_label('Twitter: ', 'twitter')?>
-			<?=form_input('twitter', $tecnicogestor ? $tecnicogestor[0]->twitter : 'http://www.twitter.com/fulaninho', '')?>
-		</div>
-		<div id="emails">
-			<?php if ($emails != null):?>
-				<?php $i = 1;?>
-				<?php foreach ($emails as $email): ?>
-					<div id="email<?=$i?>">
-						<?=form_label('Email '.$i.': ', 'email'.$i)?>
-						<?=form_input('email'.$i, $email ? $email->email : 'fulaninho@gmail.com', "id='email".$i."'")?>
-						<a onclick="removeEmail($(this));" href="javascript:void(0);" <?php if ($i==1) echo "style='display:none;'"; ?>> Remover </a>
+	<h2> &raquo;&nbsp;&nbsp;&nbsp;novo TÃ©cnico/Gestor</h2>
+</div>
+<div id="header">
+	<div id="menu">
+		<ul>
+			<li class="current_page_item"><?=anchor('tecnicogestor/alterar', 'Cadastrar novo tÃ©cnico/gestor', 'Novo registro')?></li>
+		</ul>
+	</div>
+</div>
+<!-- end header -->
+
+<div id="wrapper">
+<!-- start page -->
+<div id="page">
+	<!-- start content -->
+	<div id="content">
+		<div class="post">
+			<h1 class="title"></h1>
+			<div class="entry">
+				<?=form_open('tecnicogestor/alterando');?>
+					<?php if ($tecnicogestor != null) echo form_hidden('id', $tecnicogestor[0]->id)	?>
+					<?php if ($pessoas != null) echo form_hidden('id_pessoa', $pessoas[0]->id)	?>
+					<?php if ($emails != null) { $l = 1; foreach ($emails as $em) { echo form_hidden('id_email'.$l, $em->id); $l++;}}?>
+					<?php if ($telefones != null) { $l = 1; foreach ($telefones as $te) { echo form_hidden('id_telefone'.$l, $te->id); $l++;}}?>
+					<?php if ($titulacoes != null) { $l = 1; foreach ($titulacoes as $ti) { echo form_hidden('id_titulacao'.$l, $ti->id); $l++;}}?>
+				
+					<div>
+						<?=form_label('Nome: ', 'nome')?>
+						<?=form_input('nome', $pessoas ? $pessoas[0]->nome : 'Fulaninho da Silva', '')?>
 					</div>
-					<?php $i++;?>
-				<?php endforeach;?>
-			<?php else: ?>
-				<div id="email1">
-					<?=form_label('Email 1: ', 'email1')?>
-					<?=form_input('email1', 'fulaninho@gmail.com', "id='email1'")?>
-					<a onclick="removeEmail($(this));" href="javascript:void(0);" style="display:none"> Remover </a>
-				</div>
-			<?php endif;?>
-		</div>
-		<div>
-			<a onclick="addEmail();" href="javascript:void(0);"> Novo email </a>
-		</div>
-		<div id="telefones">
-			<?php if ($telefones != null): ?>
-				<?php $j = 1;?>
-				<?php foreach ($telefones as $telefone): ?>
-					<?php if ($telefone->tipo == 1) :?>
-						<div id="telefone<?=$j?>">
-							<?=form_label('Telefone Fixo '.$j.': ', 'telefone'.$j)?>
-							<?=form_input('telefone'.$j, $telefone ? $telefone->telefone : '33282380', 'id=telefone'.$j)?>
-							<a onclick="removeTelefone($(this));" href="javascript:void(0);" <?php if ($j==1) echo "style='display:none;'"; ?>> Remover </a>
-						</div>
-						<?php $j++;?>
-					<?php endif;?>
-				<?php endforeach;?>
-			<?php else: ?>
-				<?php $j = 1;?>
-				<div id="telefone<?=$j?>">
-					<?=form_label('Telefone Fixo '.$j.': ', 'telefone'.$j)?>
-					<?=form_input('telefone'.$j, '33282380', 'id=telefone'.$j)?>
-					<a onclick="removeTelefone($(this));" href="javascript:void(0);" <?php if ($j==1) echo "style='display:none;'"; ?>> Remover </a>
-				</div>
-			<?php endif;?>
-		</div>
-		<div>
-			<a onclick="addTelefone();" href="javascript:void(0);"> Novo telefone </a>
-		</div>
-		<div>
-			<?=form_label('Telefone Celular: ', 'tel_cel')?>
-				<?php if ($telefones != null) {foreach ($telefones as $tel) { if ($tel->tipo == 2) { $fixo = $tel; }}} ?>
-			<?=form_input('tel_cel', $telefones ? $fixo->telefone : '81776353', '')?>
-		</div>
-		<div>
-			<?=form_label('Endereço Institucional: ', 'end_institucional')?>
-			<?=form_input('end_institucional', $tecnicogestor ? $tecnicogestor[0]->end_institucional : 'QE 26 Conjunto O casa 12 - Guará II', '')?>
-		</div>
-		<div>
-			<?=form_label('CV Lates (Link): ', 'cv_lates')?>
-			<?=form_input('cv_lates', $tecnicogestor ? $tecnicogestor[0]->cv_lattes : 'http://www.googledocs.com/e723hjjejf', '')?>
-		</div>
-		<div id="titulacoes">
-			<?php if ($titulacoes != null):?>
-				<?php $k = 1;?>
-				<?=form_label('Titulações: ', 'titulacao'.$k)?>
-				<?php foreach ($titulacoes as $titulacao):?>
-					<div id="titulacao<?=$k?>">
-						<?=form_radio('titulacao'.$k, 1, $tecnicogestor ? ($titulacao->titulacao_id == 1 ? TRUE : '') : 'TRUE')?> Graduação
-						<?=form_radio('titulacao'.$k, 2, $tecnicogestor ? ($titulacao->titulacao_id == 2 ? TRUE : '') : '')?> Aperfeiçoamento
-						<?=form_radio('titulacao'.$k, 3, $tecnicogestor ? ($titulacao->titulacao_id == 3 ? TRUE : '') : '')?> Especialização
-						<?=form_radio('titulacao'.$k, 4, $tecnicogestor ? ($titulacao->titulacao_id == 4 ? TRUE : '') : '')?> Mestrado
-						<?=form_radio('titulacao'.$k, 5, $tecnicogestor ? ($titulacao->titulacao_id == 5 ? TRUE : '') : '')?> Doutorado
-						<?=form_radio('titulacao'.$k, 6, $tecnicogestor ? ($titulacao->titulacao_id == 6 ? TRUE : '') : '')?> Pós-Doutorado  ---    
-						Data: <?=form_input('data_titulacao'.$k, $titulacao ? $titulacao->data : '2008-04-01', "id='data_titulacao".$k."'")?>
-						<a onclick="removeTitulacao($(this));" href="javascript:void(0);" <?php if ($k==1) echo "style='display:none;'"; ?>> Remover </a>
+					<div>
+						<?=form_label('Estado Civil: ', 'estado_civil')?>
+						<?=form_radio('estado_civil', 1, $pessoas ? ($pessoas[0]->estado_civil == 1 ? TRUE : '') : '')?> <?=form_label('Solteiro(a)', 'ec_solteiro')?>
+						<?=form_radio('estado_civil', 2, $pessoas ? ($pessoas[0]->estado_civil == 2 ? TRUE : '') : 'TRUE')?> <?=form_label('Casado(a)', 'ec_casado')?>
+						<?=form_radio('estado_civil', 3, $pessoas ? ($pessoas[0]->estado_civil == 3 ? TRUE : '') : '')?> <?=form_label('Divorciado(a)', 'ec_divorciado')?>
+						<?=form_radio('estado_civil', 4, $pessoas ? ($pessoas[0]->estado_civil == 4 ? TRUE : '') : '')?> <?=form_label('Viï¿½vo(a)', 'ec_viuvo')?>
 					</div>
-					<?php $k++;?>
-				<?php endforeach;?>
-			<?php else: ?>
-				<?php $k = 1;?>
-				<?=form_label('Titulações: ', 'titulacao'.$k)?>
-					<div id="titulacao<?=$k?>">
-						<?=form_radio('titulacao'.$k, 1, 'TRUE')?> Graduação
-						<?=form_radio('titulacao'.$k, 2, '')?> Aperfeiçoamento
-						<?=form_radio('titulacao'.$k, 3, '')?> Especialização
-						<?=form_radio('titulacao'.$k, 4, '')?> Mestrado
-						<?=form_radio('titulacao'.$k, 5, '')?> Doutorado
-						<?=form_radio('titulacao'.$k, 6, '')?> Pós-Doutorado  ---    
-						Data: <?=form_input('data_titulacao'.$k, '2008-04-01', "id='data_titulacao".$k."'")?>
-						<a onclick="removeTitulacao($(this));" href="javascript:void(0);" <?php if ($k==1) echo "style='display:none;'"; ?>> Remover </a>
+					<div>
+						<?=form_label('Sexo: ', 'sexo')?>
+						<?=form_radio('sexo', 1, $pessoas ? ($pessoas[0]->sexo == 1 ? TRUE : '') : 'TRUE')?> <?=form_label('Masculino', 'sexo')?>
+						<?=form_radio('sexo', 2, $pessoas ? ($pessoas[0]->sexo == 2 ? TRUE : '') : '')?> <?=form_label('Feminino', 'sexo')?>
 					</div>
-					<?php $k++;?>
-			<?php endif;?>
+					<div>
+						<?=form_label('Cargo: ', 'tipo')?>
+						<?=form_radio('tipo', 1, $tecnicogestor ? ($tecnicogestor[0]->perfil == 1 ? TRUE : '') : '')?> <?=form_label('TÃ©cnico', 'tipo')?>
+						<?=form_radio('tipo', 2, $tecnicogestor ? ($tecnicogestor[0]->perfil == 2 ? TRUE : '') : 'TRUE')?> <?=form_label('Gestor', 'tipo')?>
+					</div>
+					<div>
+						<?=form_label('Site: ', 'site')?>
+						<?=form_input('site', $tecnicogestor ? $tecnicogestor[0]->site : 'http://www.fulaninho.com.br', '')?>
+					</div>
+					<div>
+						<?=form_label('Blog: ', 'blog')?>
+						<?=form_input('blog', $tecnicogestor ? $tecnicogestor[0]->blog : 'http://www.fulaninho.blogspot.com', '')?>
+					</div>
+					<div>
+						<?=form_label('Twitter: ', 'twitter')?>
+						<?=form_input('twitter', $tecnicogestor ? $tecnicogestor[0]->twitter : 'http://www.twitter.com/fulaninho', '')?>
+					</div>
+					<div id="emails">
+						<?php if ($emails != null):?>
+							<?php $i = 1;?>
+							<?php foreach ($emails as $email): ?>
+								<div id="email<?=$i?>">
+									<?=form_label('Email '.$i.': ', 'email'.$i)?>
+									<?=form_input('email'.$i, $email ? $email->email : 'fulaninho@gmail.com', "id='email".$i."'")?>
+									<a onclick="removeEmail($(this));" href="javascript:void(0);" <?php if ($i==1) echo "style='display:none;'"; ?>> Remover </a>
+								</div>
+								<?php $i++;?>
+							<?php endforeach;?>
+						<?php else: ?>
+							<div id="email1">
+								<?=form_label('Email 1: ', 'email1')?>
+								<?=form_input('email1', 'fulaninho@gmail.com', "id='email1'")?>
+								<a onclick="removeEmail($(this));" href="javascript:void(0);" style="display:none"> Remover </a>
+							</div>
+						<?php endif;?>
+					</div>
+					<div>
+						<a onclick="addEmail();" href="javascript:void(0);"> Novo email </a>
+					</div>
+					<div id="telefones">
+						<?php if ($telefones != null): ?>
+							<?php $j = 1;?>
+							<?php foreach ($telefones as $telefone): ?>
+								<?php if ($telefone->tipo == 1) :?>
+									<div id="telefone<?=$j?>">
+										<?=form_label('Telefone Fixo '.$j.': ', 'telefone'.$j)?>
+										<?=form_input('telefone'.$j, $telefone ? $telefone->telefone : '33282380', 'id=telefone'.$j)?>
+										<a onclick="removeTelefone($(this));" href="javascript:void(0);" <?php if ($j==1) echo "style='display:none;'"; ?>> Remover </a>
+									</div>
+									<?php $j++;?>
+								<?php endif;?>
+							<?php endforeach;?>
+						<?php else: ?>
+							<?php $j = 1;?>
+							<div id="telefone<?=$j?>">
+								<?=form_label('Telefone Fixo '.$j.': ', 'telefone'.$j)?>
+								<?=form_input('telefone'.$j, '33282380', 'id=telefone'.$j)?>
+								<a onclick="removeTelefone($(this));" href="javascript:void(0);" <?php if ($j==1) echo "style='display:none;'"; ?>> Remover </a>
+							</div>
+						<?php endif;?>
+					</div>
+					<div>
+						<a onclick="addTelefone();" href="javascript:void(0);"> Novo telefone </a>
+					</div>
+					<div>
+						<?=form_label('Telefone Celular: ', 'tel_cel')?>
+							<?php if ($telefones != null) {foreach ($telefones as $tel) { if ($tel->tipo == 2) { $fixo = $tel; }}} ?>
+						<?=form_input('tel_cel', $telefones ? $fixo->telefone : '81776353', '')?>
+					</div>
+					<div>
+						<?=form_label('EndereÃ§o Institucional: ', 'end_institucional')?>
+						<?=form_input('end_institucional', $tecnicogestor ? $tecnicogestor[0]->end_institucional : 'QE 26 Conjunto O casa 12 - Guarï¿½ II', '')?>
+					</div>
+					<div>
+						<?=form_label('CV Lates (Link): ', 'cv_lates')?>
+						<?=form_input('cv_lates', $tecnicogestor ? $tecnicogestor[0]->cv_lattes : 'http://www.googledocs.com/e723hjjejf', '')?>
+					</div>
+					<div id="titulacoes">
+						<?php if ($titulacoes != null):?>
+							<?php $k = 1;?>
+							<?=form_label('TitulaÃ§Ãµes: ', 'titulacao'.$k)?>
+							<?php foreach ($titulacoes as $titulacao):?>
+								<div id="titulacao<?=$k?>">
+									<?=form_radio('titulacao'.$k, 1, $tecnicogestor ? ($titulacao->titulacao_id == 1 ? TRUE : '') : 'TRUE')?> Graduaï¿½ï¿½o
+									<?=form_radio('titulacao'.$k, 2, $tecnicogestor ? ($titulacao->titulacao_id == 2 ? TRUE : '') : '')?> Aperfeiï¿½oamento
+									<?=form_radio('titulacao'.$k, 3, $tecnicogestor ? ($titulacao->titulacao_id == 3 ? TRUE : '') : '')?> Especializaï¿½ï¿½o
+									<?=form_radio('titulacao'.$k, 4, $tecnicogestor ? ($titulacao->titulacao_id == 4 ? TRUE : '') : '')?> Mestrado
+									<?=form_radio('titulacao'.$k, 5, $tecnicogestor ? ($titulacao->titulacao_id == 5 ? TRUE : '') : '')?> Doutorado
+									<?=form_radio('titulacao'.$k, 6, $tecnicogestor ? ($titulacao->titulacao_id == 6 ? TRUE : '') : '')?> Pï¿½s-Doutorado  ---    
+									Data: <?=form_input('data_titulacao'.$k, $titulacao ? $titulacao->data : '2008-04-01', "id='data_titulacao".$k."'")?>
+									<a onclick="removeTitulacao($(this));" href="javascript:void(0);" <?php if ($k==1) echo "style='display:none;'"; ?>> Remover </a>
+								</div>
+								<?php $k++;?>
+							<?php endforeach;?>
+						<?php else: ?>
+							<?php $k = 1;?>
+							<?=form_label('TitulaÃ§Ãµes: ', 'titulacao'.$k)?>
+								<div id="titulacao<?=$k?>">
+									<?=form_radio('titulacao'.$k, 1, 'TRUE')?> GraduaÃ§Ã£o
+									<?=form_radio('titulacao'.$k, 2, '')?> Aperfeioamento
+									<?=form_radio('titulacao'.$k, 3, '')?> EspecializaÃ§Ã£o
+									<?=form_radio('titulacao'.$k, 4, '')?> Mestrado
+									<?=form_radio('titulacao'.$k, 5, '')?> Doutorado
+									<?=form_radio('titulacao'.$k, 6, '')?> PÃ³s-Doutorado  ---    
+									Data: <?=form_input('data_titulacao'.$k, '2008-04-01', "id='data_titulacao".$k."'")?>
+									<a onclick="removeTitulacao($(this));" href="javascript:void(0);" <?php if ($k==1) echo "style='display:none;'"; ?>> Remover </a>
+								</div>
+								<?php $k++;?>
+						<?php endif;?>
+					</div>
+					<div>
+						<a onclick="addTitulacao();" href="javascript:void(0);"> Nova titulaÃ§Ã£o </a>
+					</div>
+					<div>
+						<?=form_label('GraduaÃ§Ã£o: ', 'graduacao')?>
+						<?=form_input('graduacao', $tecnicogestor ? $tecnicogestor[0]->graduacao : '2009-06-17', '')?>
+					</div>
+					<div>
+						<?=form_label('Data de AdmissÃ£o: ', 'data_admissao')?>
+						<?=form_input('data_admissao', $tecnicogestor ? $tecnicogestor[0]->data_admissao : '2010-08-10', '')?>
+					</div>
+					<div>
+						<?=form_label('Data de Saida: ', 'data_saida')?>
+						<?=form_input('data_saida', $tecnicogestor ? $tecnicogestor[0]->data_saida : '', '')?>
+					</div>
+					<br/>
+				
+				<?=form_submit('submit_button', 'Enviar')?>
+				
+				<?=form_close()?>
+				
+			</div>
 		</div>
-		<div>
-			<a onclick="addTitulacao();" href="javascript:void(0);"> Nova titulação </a>
-		</div>
-		<div>
-			<?=form_label('Graduação: ', 'graduacao')?>
-			<?=form_input('graduacao', $tecnicogestor ? $tecnicogestor[0]->graduacao : '2009-06-17', '')?>
-		</div>
-		<div>
-			<?=form_label('Data de Admissão: ', 'data_admissao')?>
-			<?=form_input('data_admissao', $tecnicogestor ? $tecnicogestor[0]->data_admissao : '2010-08-10', '')?>
-		</div>
-		<div>
-			<?=form_label('Data de Saída: ', 'data_saida')?>
-			<?=form_input('data_saida', $tecnicogestor ? $tecnicogestor[0]->data_saida : '', '')?>
-		</div>
-		<br/>
-	
-	<?=form_submit('submit_button', 'Enviar')?>
-	
-	<?=form_close()?>
-	
+	</div>
+	<!-- end content -->
+	<div style="clear: both;">&nbsp;</div>
+</div>
+</div>
+<!-- end page -->
+<!-- start footer -->
+<div id="footer">
+	<p id="legal">( c ) 2008. All Rights Reserved. <a href="http://www.freecsstemplates.org/">Bestfriends</a> designed by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
+</div>
+<!-- end footer -->
 
 
 </body>
