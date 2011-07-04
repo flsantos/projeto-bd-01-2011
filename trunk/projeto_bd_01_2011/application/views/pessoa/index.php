@@ -6,6 +6,8 @@
 
 <?php meta() ?>
 
+<link rel="stylesheet" href="<?=base_url()?>public/css/tablecloth/tablecloth/tablecloth.css" type="text/css" />
+
 </head>
 
 <body>
