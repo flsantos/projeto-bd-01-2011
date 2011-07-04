@@ -6,7 +6,6 @@
 	<?=meta('Content-type', 'text/html; charset=utf-8', 'equiv');?>
 	<title>Viualizar Dados</title> 
 	<link rel="stylesheet" href="<?=base_url()?>public/css/corpo/default.css" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url()?>public/css/tablecloth/tablecloth.css" type="text/css" />
 		
 	<script type="text/javascript" src="<?=base_url()?>public/css/tablecloth/tablecloth.js"> </script>
 </head>
