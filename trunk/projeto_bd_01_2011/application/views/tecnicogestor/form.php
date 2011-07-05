@@ -255,6 +255,7 @@
 					</div>
 					<?=form_fieldset_close()?>
 					
+					<?=form_fieldset('Dados')?>
 					<div>
 						<?=form_label('Graduação: ', 'graduacao')?>
 						<?=form_input('graduacao', $tecnicogestor ? $tecnicogestor[0]->graduacao : '2009-06-17', '')?>
@@ -268,6 +269,7 @@
 						<?=form_input('data_saida', $tecnicogestor ? $tecnicogestor[0]->data_saida : '', '')?>
 					</div>
 					<br/>
+					<?=form_fieldset_close()?>
 				
 				<?=form_submit('submit_button', 'Enviar')?>
 				
