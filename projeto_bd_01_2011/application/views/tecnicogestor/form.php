@@ -114,6 +114,7 @@
 					<?php if ($telefones != null) { $l = 1; foreach ($telefones as $te) { echo form_hidden('id_telefone'.$l, $te->id); $l++;}}?>
 					<?php if ($titulacoes != null) { $l = 1; foreach ($titulacoes as $ti) { echo form_hidden('id_titulacao'.$l, $ti->id); $l++;}}?>
 				
+					<?=form_fieldset('Primeiros Dados')?>
 					<div>
 						<?=form_label('Nome: ', 'nome')?>
 						<?=form_input('nome', $pessoas ? $pessoas[0]->nome : 'Fulaninho da Silva', '')?>
@@ -139,6 +140,9 @@
 						<?=form_label('Site: ', 'site')?>
 						<?=form_input('site', $tecnicogestor ? $tecnicogestor[0]->site : 'http://www.fulaninho.com.br', '')?>
 					</div>
+					<?=form_fieldset_close()?>
+					
+					<?=form_fieldset('Dados Secundários')?>
 					<div>
 						<?=form_label('Blog: ', 'blog')?>
 						<?=form_input('blog', $tecnicogestor ? $tecnicogestor[0]->blog : 'http://www.fulaninho.blogspot.com', '')?>
@@ -169,6 +173,9 @@
 					<div>
 						<a onclick="addEmail();" href="javascript:void(0);"> Novo email </a>
 					</div>
+					<?=form_fieldset_close()?>
+					
+					<?=form_fieldset('Dados Terciários')?>
 					<div id="telefones">
 						<?php if ($telefones != null): ?>
 							<?php $j = 1;?>
@@ -207,6 +214,9 @@
 						<?=form_label('CV Lates (Link): ', 'cv_lates')?>
 						<?=form_input('cv_lates', $tecnicogestor ? $tecnicogestor[0]->cv_lattes : 'http://www.googledocs.com/e723hjjejf', '')?>
 					</div>
+					<?=form_fieldset_close()?>
+					
+					<?=form_fieldset('Dados Quaternários')?>
 					<div id="titulacoes">
 						<?php if ($titulacoes != null):?>
 							<?php $k = 1;?>
@@ -243,6 +253,8 @@
 					<div>
 						<a onclick="addTitulacao();" href="javascript:void(0);"> Nova titulação </a>
 					</div>
+					<?=form_fieldset_close()?>
+					
 					<div>
 						<?=form_label('Graduação: ', 'graduacao')?>
 						<?=form_input('graduacao', $tecnicogestor ? $tecnicogestor[0]->graduacao : '2009-06-17', '')?>
