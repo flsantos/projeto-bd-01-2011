@@ -77,8 +77,8 @@ form {
 
 fieldset {
 	margin: 0 0 30px 0;
-	padding: 0;
-	border: 2px #FFF;
+	padding: 20px 10px 20px 10px;
+	/*border: 1px #FFF;*/
 }
 
 legend {
@@ -383,4 +383,8 @@ html>body #footer {
 #legal a {
 	font-weight: normal;
 	color: #FFFFFF;
+}
+
+.entry div {
+	margin-bottom: 10px;	
 }
