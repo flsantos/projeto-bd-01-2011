@@ -276,7 +276,7 @@ SHOW WARNINGS;
 DROP TABLE IF EXISTS `pibic`.`bolsista` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `pibic`.`bolsista` (
+CREATE  TABLE IF NOT EXISTS `mydb`.`bolsista` (
   `edital` VARCHAR(45) NULL ,
   `outros` VARCHAR(100) NULL ,
   `cota_unb` INT NULL ,
@@ -286,10 +286,12 @@ CREATE  TABLE IF NOT EXISTS `pibic`.`bolsista` (
   `pibic_cnpq` VARCHAR(70) NULL ,
   `remunerado` TINYINT(1)  NULL ,
   `discente_matricula` INT NOT NULL ,
-  PRIMARY KEY (`discente_matricula`) ,
+  `cod` INT NOT NULL AUTO_INCREMENT ,
+  INDEX `fk_bolsista_discente1` (`discente_matricula` ASC) ,
+  PRIMARY KEY (`cod`) ,
   CONSTRAINT `fk_bolsista_discente1`
     FOREIGN KEY (`discente_matricula` )
-    REFERENCES `pibic`.`discente` (`matricula` )
+    REFERENCES `mydb`.`discente` (`matricula` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
